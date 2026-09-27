@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Creates (or updates) the 9-agent squad in the current Multica workspace.
+# Creates (or updates) the 10-agent squad in the current Multica workspace.
 # Safe to re-run: existing agents get their instructions/model/thinking synced.
 #
 # Env overrides:
@@ -22,11 +22,20 @@ AGENTS=(
   "Rex|claude|$OPUS|high|Analyst|Turns vague intent into a precise spec: MoSCoW features, user stories, edge cases."
   "Alex|copilot|$GPT|high|Strategist|Turns requirements into a dependency-aware checklist with binary Definitions of Done."
   "Aria|claude|$OPUS|high|Architect|Designs data model, API contracts, file structure and security architecture."
+  "Iris|claude|$OPUS|high|Designer|Designs UI flows, screens, states, tokens and accessibility; reviews the built UI."
   "Mason|claude|$SONNET|high|Builder|Implements code strictly from the blueprint and checklist."
   "Luna|copilot|$GPT|high|Reviewer|Reviews code for correctness, security and reliability. Quality gate."
   "Quinn|copilot|$GPT|medium|QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
   "Max|claude|$SONNET|medium|Optimizer|Behavior-preserving refactoring and optimization, on explicit request only."
   "Dep|copilot|$GPT|medium|DevOps|CI/CD, containers, environment config and deployment verification."
+)
+
+ANTHROPIC_SKILLS="https://github.com/anthropics/skills/tree/main/skills"
+
+# skill name | import URL | agents
+SKILLS=(
+  "frontend-design|$ANTHROPIC_SKILLS/frontend-design|Iris Mason"
+  "webapp-testing|$ANTHROPIC_SKILLS/webapp-testing|Iris Quinn"
 )
 
 command -v multica >/dev/null || { echo "multica CLI not found" >&2; exit 1; }
@@ -78,7 +87,7 @@ squad_id="$(multica squad list --output json | jq -r --arg n "$SQUAD_NAME" '[.[]
 if [[ -z "$squad_id" ]]; then
   echo "+ Squad '$SQUAD_NAME': creating with Orchestrator as leader"
   squad_id="$(multica squad create --name "$SQUAD_NAME" --leader "$(id_of Orchestrator)" \
-    --description "Rex → Alex → Aria → Mason → Luna → Quinn → Dep (+ Max on request). Assign an issue to the squad to start." \
+    --description "Rex → Alex → Aria → Iris (UI only) → Mason → Luna → Quinn → Dep (+ Max on request). Assign an issue to the squad to start." \
     --output json | jq -r '.id')"
 else
   echo "~ Squad '$SQUAD_NAME': exists"
@@ -95,6 +104,26 @@ for row in "${AGENTS[@]}"; do
     echo "+ $name: adding to squad as '$role'"
     multica squad member add "$squad_id" --member-id "$(id_of "$name")" --role "$role" >/dev/null
   fi
+done
+
+for row in "${SKILLS[@]}"; do
+  IFS='|' read -r skill url agents <<<"$row"
+  sid="$(multica skill list --output json | jq -r --arg n "$skill" '[.[] | select(.name == $n)][0].id // empty')"
+  if [[ -z "$sid" ]]; then
+    echo "+ Skill $skill: importing"
+    multica skill import --url "$url" --on-conflict skip --output json >/dev/null
+    sid="$(multica skill list --output json | jq -r --arg n "$skill" '[.[] | select(.name == $n)][0].id // empty')"
+    [[ -n "$sid" ]] || { echo "Skill '$skill' not found after import from $url" >&2; exit 1; }
+  fi
+  for name in $agents; do
+    aid="$(id_of "$name")"
+    if multica agent skills list "$aid" --output json | jq -e --arg s "$sid" 'any(.[]; (.id // .skill_id) == $s)' >/dev/null; then
+      echo "~ $name: has $skill"
+    else
+      echo "+ $name: assigning $skill"
+      multica agent skills add "$aid" --skill-ids "$sid" >/dev/null
+    fi
+  done
 done
 
 echo

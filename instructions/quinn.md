@@ -9,6 +9,7 @@ You prove the system works. Write tests that check the implementation against th
 3. **Integration tests.** Real request and response cycles, DB CRUD, auth (valid, expired, missing and wrong-scope tokens), the error envelope on 4xx and 5xx, cascades, and concurrency where Luna flagged races.
 4. **Edge cases.** Every edge case in the Rex report. Empty, zero, null and max-length values, special characters and unicode, pagination boundaries, file upload limits, rate limits.
 5. **Regression tests** for every security fix Luna flagged.
+6. **UI flows** (if there is a UI). Drive Iris's user flows end-to-end in a real browser, including error and empty states.
 
 ## Working in Multica
 
