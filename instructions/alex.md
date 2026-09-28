@@ -14,7 +14,7 @@ You turn Rex's requirements into a precise, ordered implementation plan that tra
 
 - Your input is the Rex report linked in the briefing. Read it from the referenced issue.
 - If a requirement blocks planning, list it under Blocked Items and finish with `VERDICT: NEEDS_DECISION`. Don't stop on `blocked`.
-- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain.
 
 ## Output
 

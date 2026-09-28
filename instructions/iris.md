@@ -26,7 +26,7 @@ You run only when the work has a user interface. You have two jobs: **design** (
 - Read the Rex and Aria reports linked in the briefing. If a repo is attached, look at the existing UI and styles before you design.
 - Deliver the spec as markdown. When a visual is worth more than words, add a self-contained HTML mockup (inline CSS, no build step) and attach it to the issue.
 - If a UX question blocks the design (target device, brand, audience; at most 3 questions), finish with `VERDICT: NEEDS_DECISION` and your questions. Don't stop on `blocked`.
-- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`. For a visual review, BLOCK or PASS WITH CONDITIONS means `VERDICT: CHANGES_NEEDED`.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. In a visual review you are a reviewer: BLOCK or PASS WITH CONDITIONS means `VERDICT: CHANGES_NEEDED`.
 
 ## Output (design)
 

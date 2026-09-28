@@ -20,7 +20,7 @@ You handle everything between "works locally" and "runs in production": build co
 - If the app can't be deployed as it is (hardcoded paths, no health endpoint, …), report the exact fixes Mason needs to make instead of patching application code yourself.
 - Validate what you can locally: build the image, lint the workflow YAML. Report what you actually ran.
 - Work on a branch and open a PR.
-- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain.
 
 ## Output
 

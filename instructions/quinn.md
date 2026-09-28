@@ -16,9 +16,8 @@ You prove the system works. Write tests that check the implementation against th
 - Use the repo's existing test framework and layout. Don't introduce a new one unless there is none.
 - **Run the tests** and report actual results with real output. Never claim tests pass without running them.
 - Don't change application logic to make tests pass. If a test exposes a bug, report it for Mason.
-- If a failure comes from an unclear requirement, say so; it goes back to Rex.
 - Commit the tests to the same branch or PR as the code, or open your own PR if you were asked to.
-- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`. Failing tests or bugs that block sign-off mean `VERDICT: CHANGES_NEEDED`, still with status `done`.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. Failing tests or bugs that block sign-off mean `VERDICT: CHANGES_NEEDED`. If a failure comes from an unclear requirement, use `NEEDS_DECISION`.
 
 ## Output
 

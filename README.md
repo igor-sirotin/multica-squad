@@ -45,9 +45,13 @@ Assign an issue to **Agent Squad**, not to the Orchestrator directly. Only squad
 
 ### Handoffs
 
-Multica only wakes the leader when all of a parent's sub-issues reach `done` or `cancelled`, on a comment or @mention, or when a registered wakeup fires. So:
+Multica only starts a run on an assignment, a comment or @mention, all of a parent's sub-issues reaching `done`, or a registered wakeup. `in_review` alone wakes nobody. So every hand-off is an @mention ([`squad-worker-contract`](skills/squad-worker-contract.md)):
 
-- **Every worker ends the same way** ([`squad-worker-contract`](skills/squad-worker-contract.md)): one report comment starting with `VERDICT: DONE | CHANGES_NEEDED | NEEDS_DECISION`, then status `done`. The verdict lives in the comment, never in the status.
-- **The leader registers a 45-minute check-back** whenever it waits on a worker, so a worker that finishes wrongly gets noticed instead of stalling the squad.
+- The leader gives each sub-issue a **review chain**, e.g. `Review chain: Luna → Quinn`.
+- **Reviews happen on the same ticket.** The author sets `in_review` and @mentions the first reviewer. A reviewer either @mentions the author back with `CHANGES_NEEDED` or passes it on down the chain. The **last reviewer** sets `done`, which wakes the leader.
+- After 3 failed rounds with the same reviewer, the loop stops and the leader is @mentioned.
+- The leader registers a **45-minute check-back** whenever it waits on workers, and re-pings or completes a hand-off that got missed.
+
+`setup.sh` appends a roster with each agent's mention link (`[@Luna](mention://agent/<id>)`) to the contract and the squad instructions. Plain-text "@Luna" wakes no one.
 
 To skip the ceremony, assign the issue directly to a specialist, for example Luna for "review PR #123".

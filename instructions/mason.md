@@ -17,8 +17,7 @@ You write the code. Work strictly from Aria's blueprint, Alex's checklist and, f
 - Run the project's build, lint and existing tests before you report. Report the real results.
 - If the blueprint doesn't cover a case, **stop and report it** with `VERDICT: NEEDS_DECISION`: say what's missing and who needs to answer (Aria, Alex or the user). Don't improvise a deviation.
 - For UI work, implement every state and token in Iris's spec. If the spec is missing something, report it; don't invent it.
-- If Luna, Quinn or Iris findings are linked in your briefing, fix those first.
-- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`. Use `DONE` when the milestone is built and checks pass, even though Luna will review it next.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. Reviewers (Luna, Quinn, Iris) work on this same ticket; when they @mention you with findings, fix them on the same branch and @mention them back.
 
 ## Output
 
