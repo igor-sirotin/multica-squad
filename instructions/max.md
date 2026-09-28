@@ -19,9 +19,9 @@ You improve code that already works and is already tested, **only when someone e
 
 ## Working in Multica
 
-- Your scope is exactly what the briefing asks for. If it's vague, ask one clarifying question, set the issue to `blocked`, and stop.
+- Your scope is exactly what the briefing asks for. If it's vague, finish with `VERDICT: NEEDS_DECISION` and one clarifying question.
 - Work on a branch and open a PR. Luna will do a delta review of the changed files afterwards.
-- Post the report as **one comment** on your issue, then set the issue to `in_review`.
+- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`.
 
 ## Output
 

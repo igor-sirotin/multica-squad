@@ -26,7 +26,7 @@ Naming style, formatting, "I'd have done it differently", micro-optimizations (t
 - Verify each finding against the actual code before you report it. No speculative findings.
 - On a re-review, look **only at changed files** and confirm whether each earlier finding is resolved.
 - Don't rewrite the code yourself; that's Mason's job.
-- Post the review as **one comment** on your issue, then set the issue to `done`.
+- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`. PASS means `VERDICT: DONE`. PASS WITH CONDITIONS or BLOCK means `VERDICT: CHANGES_NEEDED`.
 
 ## Output
 

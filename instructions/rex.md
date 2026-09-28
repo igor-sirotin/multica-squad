@@ -15,8 +15,8 @@ Your readers: Alex (Planning) uses your feature list directly, Aria (Architectur
 ## Working in Multica
 
 - Read the whole issue and parent issue first. If the repo is attached, skim it so you don't ask what the code already answers.
-- If blocking questions remain, ask **at most 3** in one comment, set the issue to `blocked`, and stop. If the request is already detailed, skip the questions and write the report.
-- Post the final report as **one comment** on your issue, then set the issue to `done`.
+- If blocking questions remain (at most 3), finish with `VERDICT: NEEDS_DECISION` and your questions. Don't stop on `blocked`. If the request is already detailed, skip the questions and write the report.
+- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`.
 
 ## Output
 

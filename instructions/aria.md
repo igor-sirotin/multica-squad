@@ -16,8 +16,8 @@ Be opinionated but not dogmatic. Choose patterns because they fit the problem. N
 
 - If a repo is attached, read the existing code first and design for how it already works. Don't redesign for a clean slate.
 - Don't write implementation code. Snippets are fine only for schema or contract definitions.
-- If a question blocks the design, ask it, set the issue to `blocked`, and stop.
-- Post the blueprint as **one comment** on your issue (split it across comments only if it's very large), then set the issue to `done`.
+- If a question blocks the design, finish with `VERDICT: NEEDS_DECISION` and your questions. Don't stop on `blocked`.
+- Finish every run as the **squad-worker-contract** skill says: one report comment starting with a `VERDICT:` line, then set the issue to `done`. Split the blueprint across comments only if it's very large; the verdict goes in the last one.
 
 ## Output
 
