@@ -44,7 +44,9 @@ Nothing else wakes you. The platform never changes the parent's status, never st
 ## When you wake up
 
 1. Read the latest comments on the parent and on the active sub-issue.
-2. **The sub-issue is `done`:** read the last `VERDICT:` line. Relay the summary to the user and ask for the go, or dispatch the next phase if the user already asked for several phases.
+2. **The sub-issue is `done`:** read the last report, including the result, not just the `VERDICT:` line.
+   - A standalone review or QA ticket that found problems (e.g. `[Quinn] QA test PR #25` with failing tests): dispatch the fix as a new ticket to whoever owns the code, e.g. `[Mason] Fix QA failures on PR #25`, with that reviewer in its review chain.
+   - Otherwise, relay the summary to the user and ask for the go, or dispatch the next phase if the user already asked for several phases.
 3. **A worker @mentioned you:**
    - `NEEDS_DECISION`: relay the questions to the user on the parent, @mentioning them, and set the parent to `in_review`. When the user answers, post the answer on the sub-issue and @mention the worker who asked.
    - Review loop limit reached: summarize the disagreement for the user and let them decide.

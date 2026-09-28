@@ -13,10 +13,12 @@ The leader's briefing lists a **Review chain** for the ticket, for example `Revi
    - `VERDICT: NEEDS_DECISION`: you can't continue. Ask at most 3 questions, @mention the **leader**, and leave the status as it is.
 2. When a reviewer @mentions you with changes: fix them, reply with what changed, @mention **that same reviewer**, and set `in_review` again.
 
+**If the ticket is your own review or QA ticket** (e.g. `[Luna] Review PR #25`, chain `none`): you are its author, so there's nobody to send `CHANGES_NEEDED` to. Finish with `VERDICT: DONE` and set `done`, with the result (PASS, or the findings and failing tests) in the report. The leader reads it and sends the fixes to whoever owns the code. Use `NEEDS_DECISION` only for real questions.
+
 **If you are a reviewer** (you were @mentioned on someone else's ticket):
 1. Review, then reply with one comment starting with a verdict line:
    - `VERDICT: PASS`: if another reviewer follows you in the chain, @mention them and leave the ticket in `in_review`. If you are the **last** reviewer, set the ticket to `done`.
-   - `VERDICT: CHANGES_NEEDED`: list the findings, @mention the **author**, and set the ticket to `in_progress`.
+   - `VERDICT: CHANGES_NEEDED`: list the findings, @mention the **author**, and set the ticket to `in_progress`. Only ever on someone else's ticket.
    - `VERDICT: NEEDS_DECISION`: @mention the **leader** with your questions.
 2. On a re-review, check only what changed since your last review.
 

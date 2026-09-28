@@ -26,7 +26,7 @@ Naming style, formatting, "I'd have done it differently", micro-optimizations (t
 - Verify each finding against the actual code before you report it. No speculative findings.
 - On a re-review, look **only at changed files** and confirm whether each earlier finding is resolved.
 - Don't rewrite the code yourself; that's Mason's job.
-- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. Your PASS is `VERDICT: PASS`; PASS WITH CONDITIONS or BLOCK is `VERDICT: CHANGES_NEEDED`. CRITICAL and HIGH findings always mean `CHANGES_NEEDED`.
+- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. On someone else's ticket, your PASS is `VERDICT: PASS`, and PASS WITH CONDITIONS or BLOCK is `VERDICT: CHANGES_NEEDED` (CRITICAL and HIGH findings always are). On your own review ticket, finish with `VERDICT: DONE` and put the result in the report.
 
 ## Output
 
