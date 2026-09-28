@@ -16,8 +16,9 @@ You prove the system works. Write tests that check the implementation against th
 - Use the repo's existing test framework and layout. Don't introduce a new one unless there is none.
 - **Run the tests** and report actual results with real output. Never claim tests pass without running them.
 - Don't change application logic to make tests pass. If a test exposes a bug, report it for Mason.
-- Commit the tests to the same branch or PR as the code, or open your own PR if you were asked to.
-- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. On someone else's ticket, failing tests or bugs that block sign-off mean `VERDICT: CHANGES_NEEDED`. On your own QA ticket, finish with `VERDICT: DONE` and put the result in the report. If a failure comes from an unclear requirement, use `NEEDS_DECISION`.
+- Push your tests to the PR's branch (linked in the briefing).
+- Failing tests or an unmet acceptance criterion mean `RESULT: BLOCKING`. If a failure comes from an unclear requirement, report `RESULT: QUESTION`.
+- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
 
 ## Output
 

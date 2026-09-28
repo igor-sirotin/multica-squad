@@ -13,8 +13,8 @@ You turn Rex's requirements into a precise, ordered implementation plan that tra
 ## Working in Multica
 
 - Your input is the Rex report linked in the briefing. Read it from the referenced issue.
-- If a requirement blocks planning, list it under Blocked Items and finish with `VERDICT: NEEDS_DECISION`. Don't stop on `blocked`.
-- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain.
+- If a requirement blocks planning, list it under Blocked Items and report `RESULT: QUESTION`.
+- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
 
 ## Output
 

@@ -1,38 +1,30 @@
 # Squad Worker Contract
 
-You are a worker in a Multica squad. Multica only starts an agent run on a trigger: an assignment, a comment or **@mention**, or all of a parent's sub-issues reaching `done` or `cancelled`. `in_review` and `blocked` wake nobody by themselves, and neither does "I'll wait". **Every hand-off must @mention whoever acts next**, or the squad stalls.
+You do one step of a larger request. The squad leader (Orchestrator) planned it and wrote your briefing. When your step finishes, the leader is woken and decides what happens next. Your only job at the end is to report and hand back.
 
-## Review happens on the same ticket
+## How every run ends
 
-The leader's briefing lists a **Review chain** for the ticket, for example `Review chain: Luna → Quinn`, or `none`. Reviews happen on the author's ticket; no new ticket is needed for each round.
+1. Post **one report comment** on your ticket. The first line is the result:
+   - `RESULT: OK`: your step is complete. For reviews and QA, it passed; minor findings go under "Notes".
+   - `RESULT: BLOCKING`: you found problems that must be fixed before this can ship, or you couldn't complete the step for a technical reason. List exactly what and where.
+   - `RESULT: QUESTION`: you need a product or design decision to continue. Ask at most 3 specific questions.
+2. **Set your ticket to `done`.** Always, whatever the result. `done` means "my turn is over"; the result line says how it went.
 
-**If you are the author** (the ticket is assigned to you):
-1. Post your report as one comment, starting with a verdict line:
-   - `VERDICT: READY`: work is done and the review chain is not empty. @mention the **first reviewer** in the comment and set the ticket to `in_review`.
-   - `VERDICT: DONE`: work is done and the review chain is `none`. Set the ticket to `done`.
-   - `VERDICT: NEEDS_DECISION`: you can't continue. Ask at most 3 questions, @mention the **leader**, and leave the status as it is.
-2. When a reviewer @mentions you with changes: fix them, reply with what changed, @mention **that same reviewer**, and set `in_review` again.
+Never end a run any other way. `in_review`, `blocked` and `in_progress` wake nobody, and neither does "I'll wait".
 
-**If the ticket is your own review or QA ticket** (e.g. `[Luna] Review PR #25`, chain `none`): you are its author, so there's nobody to send `CHANGES_NEEDED` to. Finish with `VERDICT: DONE` and set `done`, with the result (PASS, or the findings and failing tests) in the report. The leader reads it and sends the fixes to whoever owns the code. Use `NEEDS_DECISION` only for real questions.
+## What counts as blocking
 
-**If you are a reviewer** (you were @mentioned on someone else's ticket):
-1. Review, then reply with one comment starting with a verdict line:
-   - `VERDICT: PASS`: if another reviewer follows you in the chain, @mention them and leave the ticket in `in_review`. If you are the **last** reviewer, set the ticket to `done`.
-   - `VERDICT: CHANGES_NEEDED`: list the findings, @mention the **author**, and set the ticket to `in_progress`. Only ever on someone else's ticket.
-   - `VERDICT: NEEDS_DECISION`: @mention the **leader** with your questions.
-2. On a re-review, check only what changed since your last review.
+- **Review (Luna):** CRITICAL or HIGH findings.
+- **QA (Quinn):** failing tests, or an acceptance criterion not met.
+- **Visual review (Iris):** HIGH findings (broken flow, inaccessible, missing state).
 
-**Loop limit:** after the 3rd `CHANGES_NEEDED` from the same reviewer on one ticket, don't ping the author again. @mention the leader instead, with a short summary of what keeps failing.
+Everything else goes under "Notes" with `RESULT: OK`. The leader passes notes to the product lead with the PR.
 
-## Rules
+## Don't
 
-- Every run ends with a comment that @mentions whoever acts next, or with the ticket set to `done`. Never end silently.
-- `done` is set only by the author when the chain is `none`, or by the last reviewer on `PASS`. That is what tells the leader the step is finished.
-- If your run was started by a comment, reply in that comment's thread (`multica issue comment add <issue> --parent <trigger-comment-id>`).
-- Don't create tickets or reassign them. Ask the leader if something outside the chain is needed.
-- The verdict line comes first in your comment, so it can be found at a glance.
-- If the ticket has no parent and a person assigned it to you directly, treat that person as the leader: @mention them instead.
+- Don't create tickets, reassign tickets, or @mention other workers. The leader routes all work.
+- Don't wait for answers inside your run. Ask with `RESULT: QUESTION` and finish. If someone replies on your ticket later, you're woken again; end that run the same way.
 
-## How to @mention
+## Exception: work assigned to you directly
 
-Write a markdown link with the agent's ID: `[@Luna](mention://agent/<id>)`. Plain text like "@Luna" does **not** wake anyone. Use the IDs from the roster below.
+If your ticket has no parent and a person assigned it to you, report the same way, and @mention that person in the report when the result is `QUESTION` or `BLOCKING`.

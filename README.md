@@ -41,17 +41,20 @@ Add more to the `SKILLS` table in `setup.sh`. Next candidates if Iris's output f
 
 ## How to use
 
-Assign an issue to **Agent Squad**, not to the Orchestrator directly. Only squad-assigned issues give the leader the squad protocol ([`instructions/squad.md`](instructions/squad.md)), control over the parent's status, and your comments. The Orchestrator picks one specialist, creates a `[Agent] …` sub-issue for them, and after each phase posts a summary on your issue and waits for your "go". Full reports are comments on the sub-issues.
+You're the product lead:
 
-### Handoffs
+1. Create an issue with a feature or a problem and assign it to **Agent Squad**, not to the Orchestrator directly.
+2. The team runs on its own. The Orchestrator picks the smallest pipeline that fits (e.g. Mason → Luna → Quinn for a small change, with Rex, Aria and Iris added for bigger features), dispatches each step as a sub-issue, and loops fixes until review and QA pass.
+3. You're @mentioned only for a real product question, and for delivery: the parent moves to `in_review` with the PR link, what was verified, and non-blocking notes.
+4. Review the PR. Comment on the issue to request changes (the team does another round) or to say it's merged (the issue closes).
 
-Multica only starts a run on an assignment, a comment or @mention, all of a parent's sub-issues reaching `done`, or a registered wakeup. `in_review` alone wakes nobody. So every hand-off is an @mention ([`squad-worker-contract`](skills/squad-worker-contract.md)):
+Production issues fit the same flow later: anything that creates an issue assigned to Agent Squad (an autopilot, an alert integration) starts it.
 
-- The leader gives each sub-issue a **review chain**, e.g. `Review chain: Luna → Quinn`.
-- **Reviews happen on the same ticket.** The author sets `in_review` and @mentions the first reviewer. A reviewer either @mentions the author back with `CHANGES_NEEDED` or passes it on down the chain. The **last reviewer** sets `done`, which wakes the leader.
-- After 3 failed rounds with the same reviewer, the loop stops and the leader is @mentioned.
-- The leader registers a **45-minute check-back** whenever it waits on workers, and re-pings or completes a hand-off that got missed.
+### How hand-offs work
 
-`setup.sh` appends a roster with each agent's mention link (`[@Luna](mention://agent/<id>)`) to the contract and the squad instructions. Plain-text "@Luna" wakes no one.
+Multica only wakes the leader when all of a parent's sub-issues reach `done` or `cancelled`, on a comment or @mention, or when a registered wakeup fires. So there are two rules:
 
-To skip the ceremony, assign the issue directly to a specialist, for example Luna for "review PR #123".
+- **Workers** ([`squad-worker-contract`](skills/squad-worker-contract.md)): one report starting with `RESULT: OK | BLOCKING | QUESTION`, then status `done`. Always.
+- **Leader** ([`instructions/squad.md`](instructions/squad.md)): on every wake-up, read the sub-issues, close leftovers, dispatch the next step, and register a 45-minute check-back while waiting.
+
+You can also assign a ticket straight to one specialist (e.g. Luna for "review PR #123"). It reports the same way and @mentions you if it needs you.

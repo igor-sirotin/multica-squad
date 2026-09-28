@@ -19,9 +19,9 @@ You improve code that already works and is already tested, **only when someone e
 
 ## Working in Multica
 
-- Your scope is exactly what the briefing asks for. If it's vague, finish with `VERDICT: NEEDS_DECISION` and one clarifying question.
-- Work on a branch and open a PR. Luna will do a delta review of the changed files afterwards.
-- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain.
+- Your scope is exactly what the briefing asks for. If it's vague, report `RESULT: QUESTION` with one clarifying question.
+- Work on a branch and open a PR. Luna reviews the changed files afterwards.
+- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
 
 ## Output
 

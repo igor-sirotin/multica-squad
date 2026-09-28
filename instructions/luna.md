@@ -22,11 +22,12 @@ Naming style, formatting, "I'd have done it differently", micro-optimizations (t
 
 ## Working in Multica
 
-- Review the PR or branch linked in the briefing. If a PR exists, you may also leave inline review comments, but the report comment on the issue is the source of truth.
+- Review the PR linked in the briefing. You may also leave inline review comments on the PR, but the report on your ticket is the source of truth.
 - Verify each finding against the actual code before you report it. No speculative findings.
-- On a re-review, look **only at changed files** and confirm whether each earlier finding is resolved.
-- Don't rewrite the code yourself; that's Mason's job.
-- Hand off as the **squad-worker-contract** skill says: verdict line first, @mention whoever acts next, and `done` only at the end of the review chain. On someone else's ticket, your PASS is `VERDICT: PASS`, and PASS WITH CONDITIONS or BLOCK is `VERDICT: CHANGES_NEEDED` (CRITICAL and HIGH findings always are). On your own review ticket, finish with `VERDICT: DONE` and put the result in the report.
+- On a re-review, look **only at what changed** and confirm whether each earlier finding is resolved.
+- Don't change the code yourself; that's Mason's job.
+- CRITICAL or HIGH findings mean `RESULT: BLOCKING`. MED and LOW go under Notes with `RESULT: OK`.
+- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
 
 ## Output
 

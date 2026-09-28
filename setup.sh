@@ -82,29 +82,21 @@ for row in "${AGENTS[@]}"; do
   IDS+="$name=$id"$'\n'
 done
 
-ROSTER="
-
-## Roster
-
-| Agent | Role | Mention |
-|-------|------|---------|
-"
-for row in "${AGENTS[@]}"; do
-  IFS='|' read -r name _ _ _ role _ <<<"$row"
-  ROSTER+="| $name | $role | \`[@$name](mention://agent/$(id_of "$name"))\` |"$'\n'
-done
-SQUAD_INSTRUCTIONS="$(cat instructions/squad.md)$ROSTER"
+SQUAD_DESC="Autonomous team: assign a feature or problem to the squad, get a PR back for final review."
+LEAD="$(multica user profile get --output json)"
+SQUAD_INSTRUCTIONS="$(sed -e "s/{{LEAD_NAME}}/$(jq -r .name <<<"$LEAD")/g" \
+  -e "s/{{LEAD_ID}}/$(jq -r .id <<<"$LEAD")/g" instructions/squad.md)"
 
 squad_id="$(multica squad list --output json | jq -r --arg n "$SQUAD_NAME" '[.[] | select(.name == $n)][0].id // empty')"
 if [[ -z "$squad_id" ]]; then
   echo "+ Squad '$SQUAD_NAME': creating with Orchestrator as leader"
   squad_id="$(multica squad create --name "$SQUAD_NAME" --leader "$(id_of Orchestrator)" \
     --instructions "$SQUAD_INSTRUCTIONS" \
-    --description "Rex → Alex → Aria → Iris (UI only) → Mason → Luna → Quinn → Dep (+ Max on request). Assign an issue to the squad to start." \
+    --description "$SQUAD_DESC" \
     --output json | jq -r '.id')"
 else
   echo "~ Squad '$SQUAD_NAME': exists, syncing instructions"
-  multica squad update "$squad_id" --instructions "$SQUAD_INSTRUCTIONS" >/dev/null
+  multica squad update "$squad_id" --instructions "$SQUAD_INSTRUCTIONS" --description "$SQUAD_DESC" >/dev/null
 fi
 
 members="$(multica squad member list "$squad_id" --output json | jq -r '.[] | (.member_id // .agent_id // .id)')"
@@ -131,10 +123,10 @@ for row in "${SKILLS[@]}"; do
     desc="$(head -1 "$src" | sed 's/^# *//')"
     if [[ -z "$sid" ]]; then
       echo "+ Skill $skill: creating from $src"
-      { cat "$src"; printf '%s' "$ROSTER"; } | multica skill create --name "$skill" --description "$desc" --content-stdin --output json >/dev/null
+      multica skill create --name "$skill" --description "$desc" --content-file "$src" --output json >/dev/null
     else
       echo "~ Skill $skill: syncing from $src"
-      { cat "$src"; printf '%s' "$ROSTER"; } | multica skill update "$sid" --content-stdin --output json >/dev/null
+      multica skill update "$sid" --content-file "$src" --output json >/dev/null
     fi
   elif [[ -z "$sid" ]]; then
     echo "+ Skill $skill: importing"
