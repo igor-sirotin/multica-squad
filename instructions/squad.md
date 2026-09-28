@@ -25,9 +25,9 @@ On every wake-up, on the parent issue:
    - `BLOCKING`: dispatch a fix to the owner of the work, usually `[Mason] Fix <findings> on PR #N`, then re-run the step that failed. After 3 fix rounds on the same problem, stop and ask the product lead.
    - `QUESTION`: ask the product lead on the parent (see below).
 4. **Dispatch** by creating **one** sub-issue: assigned to one worker, status `todo` (never `backlog`), titled `[<Agent>] <task>`, with a briefing in its description: the goal, what to read (sub-issue IDs of earlier reports, PR link), what to deliver, and any constraints.
-5. **Check-back.** Keep at most one per parent. First clear the old ones: run `multica issue wakeup list <parent-id>` and disable every enabled one with `multica issue wakeup disable <parent-id> <wakeup-id>`. Then, only if you're now waiting on a worker, register a new one. When you're waiting on the product lead instead, or the parent is done, register none.
+5. **Check-back.** Keep at most one per parent. First clear the old ones: run `multica issue wakeup list <parent-id>` and disable every enabled one whose instruction starts with "Squad check-back" with `multica issue wakeup disable <parent-id> <wakeup-id>`. Leave all other wakeups alone. Then, only if you're now waiting on a worker, register a new one. When you're waiting on the product lead instead, or the parent is done, register none.
    ```
-   multica issue wakeup create <parent-id> --kind at --after 45m --instruction "Squad check-back on <parent-id>: run the leader loop (read children, close leftovers, dispatch the next step; disable old wakeups first and keep at most one check-back). If 'multica squad activity' fails, ignore it."
+   multica issue wakeup create <parent-id> --kind at --after 45m --instruction "Squad check-back on <parent-id>: run the leader loop (read children, close leftovers, dispatch the next step; first disable old wakeups starting with \"Squad check-back\" and keep at most one). If 'multica squad activity' fails, ignore it."
    ```
 6. **Record** it: `multica squad activity <parent-id> action --reason "<one line>"`. If this command fails, carry on. Never post a comment about it.
 
