@@ -17,6 +17,8 @@ Never end a run any other way. `in_review`, `blocked` and `in_progress` wake nob
 - **Review (Luna):** CRITICAL or HIGH findings.
 - **QA (Quinn):** failing tests, or an acceptance criterion not met.
 - **Visual review (Iris):** HIGH findings (broken flow, inaccessible, missing state).
+- **Security review (Hex):** CRITICAL or HIGH findings.
+- **Compliance review (Portia):** CRITICAL or HIGH findings, or an unmet privacy requirement.
 
 Everything else goes under "Notes" with `RESULT: OK`. The leader passes notes to the product lead with the PR.
 

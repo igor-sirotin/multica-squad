@@ -1,6 +1,6 @@
 # multica-squad
 
-A 10-agent squad (the 9 from agent-squad plus a UI/UX designer) for [Multica](https://multica.ai), based on
+A 12-agent squad (the 9 from agent-squad plus a UI/UX designer, a legal & privacy counsel and a security engineer) for [Multica](https://multica.ai), based on
 [agent-squad](https://github.com/sickn33/agentic-awesome-skills/tree/main/skills/agent-squad).
 
 ```sh
@@ -24,6 +24,8 @@ Re-running is safe: existing agents get their instructions, model and thinking l
 | Quinn | QA | Copilot | GPT-5.4 | default | Independent from the builder; test writing is mostly mechanical. |
 | Max | Optimizer | Claude | Sonnet 5 | medium | Rarely used; conservative refactors. |
 | Dep | DevOps | Copilot | GPT-5.4 | default | CI and Docker are well-trodden ground. |
+| Portia | Legal Counsel | Claude | Opus 5.5 | high | We handle sensitive user data; privacy mistakes are costly and hard to undo. Runs only when personal data is involved. |
+| Hex | Security Engineer | Claude | Opus 5.5 | high | Deeper than Luna's review, and a different model family from her. Runs only for sensitive changes. |
 
 All agents are private (owner-only), with at most 2 concurrent runs each. Multica has no per-agent reasoning setting for Copilot, so those agents use the runtime default.
 
@@ -36,6 +38,9 @@ Created or imported and assigned by `setup.sh`:
 | `squad-worker-contract` ([local](skills/squad-worker-contract.md)) | all workers |
 | `frontend-design` ([anthropics/skills](https://github.com/anthropics/skills)) | Iris, Mason |
 | `webapp-testing` | Iris, Quinn |
+| `compliance-check`, `legal-risk-assessment` ([anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins/tree/main/legal)) | Portia |
+| `gdpr-data-handling` ([wshobson/agents](https://github.com/wshobson/agents/tree/main/plugins/hr-legal-compliance/skills/gdpr-data-handling)) | Portia, Aria |
+| `differential-review`, `sharp-edges`, `supply-chain-risk-auditor` ([trailofbits/skills](https://github.com/trailofbits/skills)) | Hex |
 
 Add more to the `SKILLS` table in `setup.sh`. Next candidates if Iris's output feels generic: [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), and `design-review` / `plan-design-review` from [gstack](https://github.com/garrytan/gstack).
 
@@ -44,7 +49,7 @@ Add more to the `SKILLS` table in `setup.sh`. Next candidates if Iris's output f
 You're the product lead:
 
 1. Create an issue with a feature or a problem and assign it to **Agent Squad**, not to the Orchestrator directly.
-2. The team runs on its own. The Orchestrator picks the smallest pipeline that fits (e.g. Mason → Luna → Quinn for a small change, with Rex, Aria and Iris added for bigger features), dispatches each step as a sub-issue, and loops fixes until review and QA pass.
+2. The team runs on its own. The Orchestrator picks the smallest pipeline that fits (e.g. Mason → Luna → Quinn for a small change, with Rex, Aria and Iris added for bigger features, and Hex and Portia for anything touching sensitive data), dispatches each step as a sub-issue, and loops fixes until review and QA pass.
 3. You're @mentioned only for a real product question, and for delivery: the parent moves to `in_review` with the PR link, what was verified, and non-blocking notes.
 4. Review the PR. Comment on the issue to request changes (the team does another round) or to say it's merged (the issue closes).
 

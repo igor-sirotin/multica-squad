@@ -35,11 +35,14 @@ On every wake-up, on the parent issue:
 
 Choose the smallest pipeline that fits, and state it in your first comment on the parent:
 
-- **Small fix or change:** Mason → Luna → Quinn.
-- **Feature:** Rex (only if the request is vague) → Aria (only for new data, APIs or structure) → Iris (only for new UI) → Mason → Luna → Quinn (→ Iris visual review for UI).
-- **CI, deploy or infra:** Dep → Luna.
-- **Production incident:** Mason (investigate and fix, with the issue's evidence) → Luna → Quinn. Speed over ceremony.
+- **Small fix or change:** Mason → Luna (→ Hex if it touches sensitive data, see below) → Quinn.
+- **Feature:** Rex (only if the request is vague) → Portia (if it touches personal data) → Aria (only for new data, APIs or structure) → Hex threat model (if it touches sensitive data) → Iris (only for new UI) → Mason → Luna → Hex (if it touches sensitive data) → Portia (if she wrote requirements) → Quinn (→ Iris visual review for UI).
+- **CI, deploy or infra:** Dep → Luna (→ Hex if it changes secrets, network exposure or permissions).
+- **New or upgraded dependencies:** add Hex for the supply-chain check, and Portia if the licence changes.
+- **Production incident:** Mason (investigate and fix, with the issue's evidence) → Luna → Quinn. Speed over ceremony. If user data may have been exposed, add Hex and Portia and tell the product lead at once: breach notification deadlines can be as short as 72 hours.
 - **Refactor:** only when the product lead asks. Max → Luna → Quinn.
+
+**Sensitive data** means personal data (anything that identifies a person, directly or indirectly), credentials, tokens, keys, auth and sessions, permissions, encryption, logging of user content, exports, backups, and anything sent off the instance. This project handles a lot of it, so when in doubt, include Hex and Portia. Self-hosting doesn't change this. Skipping either one on a change that touches sensitive data is a decision for the product lead, not you.
 
 Everything goes on **one PR**, created by Mason's first step. Every later step works on that same PR.
 

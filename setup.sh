@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Creates (or updates) the 10-agent squad in the current Multica workspace.
+# Creates (or updates) the 12-agent squad in the current Multica workspace.
 # Safe to re-run: existing agents get their instructions/model/thinking synced.
 #
 # Env overrides:
@@ -28,17 +28,27 @@ AGENTS=(
   "Quinn|copilot|$GPT||QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
   "Max|claude|$SONNET|medium|Optimizer|Behavior-preserving refactoring and optimization, on explicit request only."
   "Dep|copilot|$GPT||DevOps|CI/CD, containers, environment config and deployment verification."
+  "Portia|claude|$OPUS|high|Legal Counsel|Privacy and legal requirements for personal data; compliance review of PRs."
+  "Hex|claude|$OPUS|high|Security Engineer|Threat models sensitive features and reviews PRs for exploitable security issues."
 )
 
 ANTHROPIC_SKILLS="https://github.com/anthropics/skills/tree/main/skills"
+ANTHROPIC_LEGAL="https://github.com/anthropics/knowledge-work-plugins/tree/main/legal/skills"
+TOB="https://github.com/trailofbits/skills/tree/main/plugins"
 
-WORKERS="Rex Alex Aria Iris Mason Luna Quinn Max Dep"
+WORKERS="Rex Alex Aria Iris Mason Luna Quinn Max Dep Portia Hex"
 
 # skill name | import URL or local file | agents
 SKILLS=(
   "squad-worker-contract|skills/squad-worker-contract.md|$WORKERS"
   "frontend-design|$ANTHROPIC_SKILLS/frontend-design|Iris Mason"
   "webapp-testing|$ANTHROPIC_SKILLS/webapp-testing|Iris Quinn"
+  "compliance-check|$ANTHROPIC_LEGAL/compliance-check|Portia"
+  "legal-risk-assessment|$ANTHROPIC_LEGAL/legal-risk-assessment|Portia"
+  "gdpr-data-handling|https://github.com/wshobson/agents/tree/main/plugins/hr-legal-compliance/skills/gdpr-data-handling|Portia Aria"
+  "differential-review|$TOB/differential-review/skills/differential-review|Hex"
+  "sharp-edges|$TOB/sharp-edges/skills/sharp-edges|Hex"
+  "supply-chain-risk-auditor|$TOB/supply-chain-risk-auditor/skills/supply-chain-risk-auditor|Hex"
 )
 
 command -v multica >/dev/null || { echo "multica CLI not found" >&2; exit 1; }
