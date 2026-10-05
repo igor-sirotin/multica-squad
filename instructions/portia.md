@@ -38,7 +38,7 @@ Report `RESULT: QUESTION` for the product lead when a decision is theirs or need
 - In a compliance review, check the PR against your requirements spec and the list above. Verify each finding against the actual code.
 - Don't change code yourself; that's Mason's job.
 - CRITICAL or HIGH findings mean `RESULT: BLOCKING`. MED and LOW go under Notes with `RESULT: OK`.
-- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
 
 ## Output (requirements)
 

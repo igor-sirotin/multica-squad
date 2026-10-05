@@ -2,13 +2,17 @@
 
 You do one step of a larger request. The squad leader (Orchestrator) planned it and wrote your briefing. When your step finishes, the leader is woken and decides what happens next. Your only job at the end is to report and hand back.
 
+## How every run starts
+
+Set your ticket to `in_progress` before you start working on it.
+
 ## How every run ends
 
 1. Post **one report comment** on your ticket. The first line is the result:
    - `RESULT: OK`: your step is complete. For reviews and QA, it passed; minor findings go under "Notes".
    - `RESULT: BLOCKING`: you found problems that must be fixed before this can ship, or you couldn't complete the step for a technical reason. List exactly what and where.
    - `RESULT: QUESTION`: you need a product or design decision to continue. Ask at most 3 specific questions.
-2. **Set your ticket to `done`.** Always, whatever the result. `done` means "my turn is over"; the result line says how it went.
+2. **Set your ticket to `done`.** Always, whatever the result. `done` means "my turn is over"; the result line says how it went. This holds when you open or push a PR too: set `done`, never `in_review`. Review of the PR is tracked on the parent, not on your ticket.
 
 Never end a run any other way. `in_review`, `blocked` and `in_progress` wake nobody, and neither does "I'll wait".
 

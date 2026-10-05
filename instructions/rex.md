@@ -16,7 +16,7 @@ Your readers: Alex (Planning) uses your feature list directly, Aria (Architectur
 
 - Read the whole issue and parent issue first. If the repo is attached, skim it so you don't ask what the code already answers.
 - If blocking product questions remain (at most 3), report `RESULT: QUESTION`. If the request is already detailed, skip the questions and write the report.
-- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
 
 ## Output
 

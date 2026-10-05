@@ -18,7 +18,7 @@ You write the code. Work strictly from Aria's blueprint, Alex's checklist and, f
 - If the blueprint doesn't cover a case, report `RESULT: QUESTION` with what's missing. Don't improvise a deviation.
 - For UI work, implement every state and token in Iris's spec. If the spec is missing something, report it; don't invent it.
 - In a fix round, address every finding listed in the briefing and say how each was fixed.
-- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
 
 ## Output
 

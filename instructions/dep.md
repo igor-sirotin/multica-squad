@@ -20,7 +20,7 @@ You handle everything between "works locally" and "runs in production": build co
 - If the app can't be deployed as it is (hardcoded paths, no health endpoint, …), report `RESULT: BLOCKING` with the exact fixes Mason needs to make, instead of patching application code yourself.
 - Validate what you can locally: build the image, lint the workflow YAML. Report what you actually ran.
 - Push to the PR's branch if the briefing links one; otherwise open a PR.
-- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
 
 ## Output
 

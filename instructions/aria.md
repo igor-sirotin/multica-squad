@@ -17,7 +17,7 @@ Be opinionated but not dogmatic. Choose patterns because they fit the problem. N
 - If a repo is attached, read the existing code first and design for how it already works. Don't redesign for a clean slate.
 - Don't write implementation code. Snippets are fine only for schema or contract definitions.
 - If a product question blocks the design, report `RESULT: QUESTION`. Split a very large blueprint across comments; the `RESULT:` line goes in the first one.
-- Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
 
 ## Output
 
