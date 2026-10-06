@@ -94,8 +94,9 @@ done
 
 SQUAD_DESC="Autonomous team: assign a feature or problem to the squad, get a PR back for final review."
 LEAD="$(multica user profile get --output json)"
-SQUAD_INSTRUCTIONS="$(sed -e "s/{{LEAD_NAME}}/$(jq -r .name <<<"$LEAD")/g" \
-  -e "s/{{LEAD_ID}}/$(jq -r .id <<<"$LEAD")/g" instructions/squad.md)"
+SQUAD_INSTRUCTIONS="$(<instructions/squad.md)"
+SQUAD_INSTRUCTIONS="${SQUAD_INSTRUCTIONS//"{{LEAD_NAME}}"/"$(jq -r .name <<<"$LEAD")"}"
+SQUAD_INSTRUCTIONS="${SQUAD_INSTRUCTIONS//"{{LEAD_ID}}"/"$(jq -r .id <<<"$LEAD")"}"
 
 squad_id="$(multica squad list --output json | jq -r --arg n "$SQUAD_NAME" '[.[] | select(.name == $n)][0].id // empty')"
 if [[ -z "$squad_id" ]]; then

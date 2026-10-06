@@ -5,7 +5,7 @@ A 12-agent squad (the 9 from agent-squad plus a UI/UX designer, a legal & privac
 
 ```sh
 ./setup.sh                                   # uses runtimes on this machine
-SQUAD_HOST=Igors-MacBook-Pro.local ./setup.sh  # or pick another machine
+SQUAD_HOST=my-laptop.local ./setup.sh        # or pick another machine
 ```
 
 Re-running is safe: existing agents get their instructions, model and thinking level synced from this repo. Edit `instructions/*.md` or the table at the top of `setup.sh`, then run it again.
@@ -63,3 +63,7 @@ Multica only wakes the leader when all of a parent's sub-issues reach `done` or 
 - **Leader** ([`instructions/squad.md`](instructions/squad.md)): on every wake-up, read the sub-issues, close leftovers, dispatch the next step, and register a 45-minute check-back while waiting.
 
 You can also assign a ticket straight to one specialist (e.g. Luna for "review PR #123"). It reports the same way and @mentions you if it needs you.
+
+## License
+
+MIT, see [LICENSE](LICENSE). The agent instructions are adapted from [agent-squad](https://github.com/sickn33/agentic-awesome-skills/tree/main/skills/agent-squad) (MIT).
