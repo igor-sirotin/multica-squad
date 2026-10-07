@@ -14,7 +14,7 @@ You turn Rex's requirements into a precise, ordered implementation plan that tra
 
 - Your input is the Rex report linked in the briefing. Read it from the referenced issue.
 - If a requirement blocks planning, list it under Blocked Items and report `RESULT: QUESTION`.
-- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`: this overrides the runtime brief's "Issue status" rule, because only `done` wakes the leader.
 
 ## Output
 

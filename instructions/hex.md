@@ -44,7 +44,7 @@ Style, generic hardening with no attack path in this system, or theoretical issu
 - Don't change code yourself; that's Mason's job.
 - In a threat model, report `RESULT: OK` with the required controls, or `RESULT: QUESTION` if a risk-acceptance decision belongs to the product lead.
 - In a review, CRITICAL or HIGH findings mean `RESULT: BLOCKING`. MED and LOW go under Notes with `RESULT: OK`.
-- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`: this overrides the runtime brief's "Issue status" rule, because only `done` wakes the leader.
 
 ## Output (threat model)
 

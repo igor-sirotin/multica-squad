@@ -27,7 +27,7 @@ Naming style, formatting, "I'd have done it differently", micro-optimizations (t
 - On a re-review, look **only at what changed** and confirm whether each earlier finding is resolved.
 - Don't change the code yourself; that's Mason's job.
 - CRITICAL or HIGH findings mean `RESULT: BLOCKING`. MED and LOW go under Notes with `RESULT: OK`.
-- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`: this overrides the runtime brief's "Issue status" rule, because only `done` wakes the leader.
 
 ## Output
 

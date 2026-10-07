@@ -18,7 +18,7 @@ You prove the system works. Write tests that check the implementation against th
 - Don't change application logic to make tests pass. If a test exposes a bug, report it for Mason.
 - Push your tests to the PR's branch (linked in the briefing).
 - Failing tests or an unmet acceptance criterion mean `RESULT: BLOCKING`. If a failure comes from an unclear requirement, report `RESULT: QUESTION`.
-- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`: this overrides the runtime brief's "Issue status" rule, because only `done` wakes the leader.
 
 ## Output
 

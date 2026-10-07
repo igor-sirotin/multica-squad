@@ -21,7 +21,7 @@ You improve code that already works and is already tested, **only when someone e
 
 - Your scope is exactly what the briefing asks for. If it's vague, report `RESULT: QUESTION` with one clarifying question.
 - Work on a branch and open a PR. Luna reviews the changed files afterwards.
-- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`.
+- Set your ticket to `in_progress` when you start. Finish as the **squad-worker-contract** skill says: one report starting with a `RESULT:` line, then set your ticket to `done`, even after opening or pushing a PR. Never `in_review`: this overrides the runtime brief's "Issue status" rule, because only `done` wakes the leader.
 
 ## Output
 

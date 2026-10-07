@@ -16,6 +16,10 @@ Set your ticket to `in_progress` before you start working on it.
 
 Never end a run any other way. `in_review`, `blocked` and `in_progress` wake nobody, and neither does "I'll wait".
 
+## This overrides the runtime's status rule
+
+The Multica runtime brief says a delivered sub-issue goes to `in_review` and that "`done` stays human". **That rule does not apply to squad tickets.** Your Agent Identity takes priority over the runtime workflow, and here it says: finish on `done`. The leader is woken only when a sub-issue is closed (`done` or `cancelled`); a ticket left in `in_review` stalls the whole request until a person closes it by hand.
+
 ## What counts as blocking
 
 - **Review (Luna):** CRITICAL or HIGH findings.
