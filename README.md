@@ -8,7 +8,7 @@ A 12-agent squad (the 9 from agent-squad plus a UI/UX designer, a legal & privac
 SQUAD_HOST=my-laptop.local ./setup.sh        # or pick another machine
 ```
 
-Re-running is safe: existing agents get their instructions, model and thinking level synced from this repo. Edit `instructions/*.md` or the table at the top of `setup.sh`, then run it again.
+Re-running is safe: existing agents get their runtime, instructions, model and thinking level synced from this repo. Edit `instructions/*.md` or the table at the top of `setup.sh`, then run it again.
 
 ## The squad
 
@@ -16,18 +16,18 @@ Re-running is safe: existing agents get their instructions, model and thinking l
 |-------|------|---------|-------|----------|-----|
 | Orchestrator | Leader | Claude | Sonnet 5 | medium | Wakes up often; routing and summaries don't need Opus. Claude is strongest at driving the Multica CLI. |
 | Rex | Analyst | Claude | Opus 5.5 | high | Spec quality determines everything downstream. |
-| Alex | Strategist | Copilot | GPT-5.4 | default | Structured decomposition; a second model family checks Rex's assumptions. |
+| Alex | Strategist | Claude | Sonnet 5 | high | Structured decomposition of Rex's spec into a checklist; doesn't need Opus. |
 | Aria | Architect | Claude | Opus 5.5 | high | The hardest reasoning in the flow; mistakes here are the most expensive. |
 | Iris | Designer | Claude | Opus 5.5 | high | Design judgement is where the model tier shows most; runs only for UI work. |
 | Mason | Builder | Claude | Sonnet 5 | high | Strong coder at reasonable cost; does the most tokens of work. |
-| Luna | Reviewer | Copilot | GPT-5.4 | default | Cross-model review: a different family reviews Claude-written code and catches different mistakes. |
-| Quinn | QA | Copilot | GPT-5.4 | default | Independent from the builder; test writing is mostly mechanical. |
+| Luna | Reviewer | Claude | Opus 5.5 | high | The quality gate: a stronger model reviews Sonnet-written code and catches what the builder missed. |
+| Quinn | QA | Claude | Opus 5.5 | high | Independent from the builder; finding the edge cases the builder missed needs Opus. |
 | Max | Optimizer | Claude | Sonnet 5 | medium | Rarely used; conservative refactors. |
-| Dep | DevOps | Copilot | GPT-5.4 | default | CI and Docker are well-trodden ground. |
+| Dep | DevOps | Claude | Sonnet 5 | medium | CI and Docker are well-trodden ground. |
 | Portia | Legal Counsel | Claude | Opus 5.5 | high | We handle sensitive user data; privacy mistakes are costly and hard to undo. Runs only when personal data is involved. |
-| Hex | Security Engineer | Claude | Opus 5.5 | high | Deeper than Luna's review, and a different model family from her. Runs only for sensitive changes. |
+| Hex | Security Engineer | Claude | Opus 5.5 | high | Deeper than Luna's review, focused on exploitable issues. Runs only for sensitive changes. |
 
-All agents are private (owner-only), with at most 2 concurrent runs each. Multica has no per-agent reasoning setting for Copilot, so those agents use the runtime default.
+All agents are private (owner-only), with at most 2 concurrent runs each.
 
 ## Skills
 

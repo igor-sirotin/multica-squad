@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Creates (or updates) the 12-agent squad in the current Multica workspace.
-# Safe to re-run: existing agents get their instructions/model/thinking synced.
+# Safe to re-run: existing agents get their runtime/instructions/model/thinking synced.
 #
 # Env overrides:
 #   SQUAD_HOST   machine whose runtimes to use (default: this host)
@@ -14,20 +14,19 @@ MAX_CONCURRENT=2
 
 OPUS="claude-opus-5-5"
 SONNET="claude-sonnet-5"
-GPT="gpt-5.4"
 
 # name | runtime provider | model | thinking (empty = runtime default) | squad role | description
 AGENTS=(
   "Orchestrator|claude|$SONNET|medium|Leader|Squad leader. Routes work to specialists one phase at a time and relays summaries."
   "Rex|claude|$OPUS|high|Analyst|Turns vague intent into a precise spec: MoSCoW features, user stories, edge cases."
-  "Alex|copilot|$GPT||Strategist|Turns requirements into a dependency-aware checklist with binary Definitions of Done."
+  "Alex|claude|$SONNET|high|Strategist|Turns requirements into a dependency-aware checklist with binary Definitions of Done."
   "Aria|claude|$OPUS|high|Architect|Designs data model, API contracts, file structure and security architecture."
   "Iris|claude|$OPUS|high|Designer|Designs UI flows, screens, states, tokens and accessibility; reviews the built UI."
   "Mason|claude|$SONNET|high|Builder|Implements code strictly from the blueprint and checklist."
-  "Luna|copilot|$GPT||Reviewer|Reviews code for correctness, security and reliability. Quality gate."
-  "Quinn|copilot|$GPT||QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
+  "Luna|claude|$OPUS|high|Reviewer|Reviews code for correctness, security and reliability. Quality gate."
+  "Quinn|claude|$OPUS|high|QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
   "Max|claude|$SONNET|medium|Optimizer|Behavior-preserving refactoring and optimization, on explicit request only."
-  "Dep|copilot|$GPT||DevOps|CI/CD, containers, environment config and deployment verification."
+  "Dep|claude|$SONNET|medium|DevOps|CI/CD, containers, environment config and deployment verification."
   "Portia|claude|$OPUS|high|Legal Counsel|Privacy and legal requirements for personal data; compliance review of PRs."
   "Hex|claude|$OPUS|high|Security Engineer|Threat models sensitive features and reviews PRs for exploitable security issues."
 )
@@ -79,9 +78,9 @@ for row in "${AGENTS[@]}"; do
 
   id="$(agent_id "$name")"
   if [[ -n "$id" ]]; then
-    echo "~ $name: exists, syncing instructions/model/thinking"
+    echo "~ $name: exists, syncing runtime/instructions/model/thinking"
     multica agent update "$id" --instructions "$instructions" --description "$desc" \
-      --model "$model" --thinking-level "$thinking" --output json >/dev/null
+      --runtime-id "$rid" --model "$model" --thinking-level "$thinking" --output json >/dev/null
   else
     echo "+ $name: creating on $provider ($model, thinking=${thinking:-default})"
     out="$(multica agent create --name "$name" --description "$desc" --instructions "$instructions" \
