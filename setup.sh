@@ -24,7 +24,7 @@ AGENTS=(
   "Iris|claude|$OPUS|high|Designer|Designs UI flows, screens, states, tokens and accessibility; reviews the built UI."
   "Mason|claude|$SONNET|high|Builder|Implements code strictly from the blueprint and checklist."
   "Luna|claude|$OPUS|high|Reviewer|Reviews code for correctness, security and reliability. Quality gate."
-  "Quinn|claude|$OPUS|high|QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
+  "Quinn|claude|$SONNET|medium|QA Tester|Writes and runs tests mapped to acceptance criteria and DoDs."
   "Max|claude|$SONNET|medium|Optimizer|Behavior-preserving refactoring and optimization, on explicit request only."
   "Dep|claude|$SONNET|medium|DevOps|CI/CD, containers, environment config and deployment verification."
   "Portia|claude|$OPUS|high|Legal Counsel|Privacy and legal requirements for personal data; compliance review of PRs."

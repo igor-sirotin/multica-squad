@@ -21,7 +21,7 @@ Re-running is safe: existing agents get their runtime, instructions, model and t
 | Iris | Designer | Claude | Opus 5.5 | high | Design judgement is where the model tier shows most; runs only for UI work. |
 | Mason | Builder | Claude | Sonnet 5 | high | Strong coder at reasonable cost; does the most tokens of work. |
 | Luna | Reviewer | Claude | Opus 5.5 | high | The quality gate: a stronger model reviews Sonnet-written code and catches what the builder missed. |
-| Quinn | QA | Claude | Opus 5.5 | high | Independent from the builder; finding the edge cases the builder missed needs Opus. |
+| Quinn | QA | Claude | Sonnet 5 | medium | Independent from the builder; test writing is mostly mechanical. |
 | Max | Optimizer | Claude | Sonnet 5 | medium | Rarely used; conservative refactors. |
 | Dep | DevOps | Claude | Sonnet 5 | medium | CI and Docker are well-trodden ground. |
 | Portia | Legal Counsel | Claude | Opus 5.5 | high | We handle sensitive user data; privacy mistakes are costly and hard to undo. Runs only when personal data is involved. |
