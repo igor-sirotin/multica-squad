@@ -101,13 +101,12 @@ squad_id="$(multica squad list --output json | jq -r --arg n "$SQUAD_NAME" '[.[]
 if [[ -z "$squad_id" ]]; then
   echo "+ Squad '$SQUAD_NAME': creating with Orchestrator as leader"
   squad_id="$(multica squad create --name "$SQUAD_NAME" --leader "$(id_of Orchestrator)" \
-    --instructions "$SQUAD_INSTRUCTIONS" \
     --description "$SQUAD_DESC" \
     --output json | jq -r '.id')"
 else
   echo "~ Squad '$SQUAD_NAME': exists, syncing instructions"
-  multica squad update "$squad_id" --instructions "$SQUAD_INSTRUCTIONS" --description "$SQUAD_DESC" >/dev/null
 fi
+multica squad update "$squad_id" --instructions "$SQUAD_INSTRUCTIONS" --description "$SQUAD_DESC" >/dev/null
 
 members="$(multica squad member list "$squad_id" --output json | jq -r '.[] | (.member_id // .agent_id // .id)')"
 
